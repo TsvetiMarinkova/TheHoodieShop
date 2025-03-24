@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-//import { Col, Row, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Products from "./components/products";
 import Home from "./components/home";
@@ -12,9 +11,6 @@ import Cart from "./components/Cart";
 function App() {
   return (
     <div className="vh-100 vw-100">
-      {/* <Container fluid className="d-flex vh-100 vw-100">
-        <Row className="m-auto">
-          <Col className="text-center"> */}
       <NavBar />
       <Routes>
         {/*using the routes and giving all the components a path */}
@@ -24,9 +20,6 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
-      {/* </Col>
-        </Row>
-      </Container> */}
     </div>
   );
 }

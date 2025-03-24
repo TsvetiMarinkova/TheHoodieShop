@@ -1,6 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 
-//creating the information modal using bootstrap
+// creating the information modal using bootstrap and including important information
+// about the different options, making it easier for the user to choose
 function InfoModal(props) {
   return (
     <Modal

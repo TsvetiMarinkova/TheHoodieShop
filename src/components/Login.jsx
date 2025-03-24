@@ -13,8 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../store/userSlice";
 
-//a hook suggested from formik for handling errors
-//it makes sure the error messages only appear if the user has touched the specific field
+// a hook that makes sure the error messages only appear if the user has touched the specific field
 const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
@@ -28,7 +27,10 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
+// setting up the login component
 const LogInForm = () => {
+  // making sure this component can access and update the redux state
+  // also setting state for the error message
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.user);
   const [error, setError] = useState(null);
@@ -36,7 +38,6 @@ const LogInForm = () => {
   return (
     <div>
       {/*adding the form inside a container and using rows for more attractive styling */}
-
       <Container fluid className="d-flex vh-100 pb-5">
         <Row className="m-auto">
           <Col className="text-center">
@@ -54,6 +55,7 @@ const LogInForm = () => {
               validationSchema={Yup.object({
                 username: Yup.string().required("Required"),
               })}
+              // checking if the username entered has been registered or not
               onSubmit={(values, { resetForm }) => {
                 if (values.username === username) {
                   dispatch(logIn(values.username));
@@ -86,6 +88,7 @@ const LogInForm = () => {
               </Form>
             </Formik>
 
+            {/* handling the case of an invalid log in with a modal */}
             {error && (
               <Modal show={true} onHide={() => setError(null)}>
                 <ModalHeader closeButton>Error</ModalHeader>

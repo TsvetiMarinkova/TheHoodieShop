@@ -5,8 +5,7 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { register } from "../store/userSlice";
 
-//a hook suggested from formik for handling errors
-//it makes sure the error messages only appear if the user has touched the specific field
+// a hook to make sure the error messages only appear if the user has touched the specific field
 const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
@@ -20,7 +19,7 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
-//a hook for efficient password validation
+// a hook for efficient password validation
 const getCharacterValidationError = (str) => {
   return `Your password must have at least 1 ${str}`;
 };
@@ -29,7 +28,7 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      {/*adding the form inside a container and using rows for more attractive styling */}
+      {/* adding the form inside a container and using rows for more attractive styling */}
       <Container fluid className="d-flex vh-100 pb-5">
         <Row className="m-auto">
           <Col className="text-center">
@@ -39,7 +38,7 @@ const RegisterForm = () => {
               </h1>
             </Row>
             <Formik
-              //initializing the values withing this form
+              // initializing the values within this form
               initialValues={{
                 firstName: "",
                 lastName: "",
@@ -48,7 +47,7 @@ const RegisterForm = () => {
                 password: "",
                 confirmPassword: "",
               }}
-              //using yup as suggested from formik to handle the validation and errors
+              // using yup as suggested from formik to handle the validation and errors
               validationSchema={Yup.object({
                 firstName: Yup.string()
                   .max(15, "Must be 15 characters or less")
@@ -64,7 +63,7 @@ const RegisterForm = () => {
                   .email("Invalid email address")
                   .required("Required"),
                 password: Yup.string()
-                  //creating all the requirements for the password using the hook from earlier
+                  // creating all the requirements for the password using the hook from earlier
                   .min(8, "Must contain 8 characters or more")
                   .required("Required")
                   .matches(
@@ -80,20 +79,20 @@ const RegisterForm = () => {
                     /[!@#$%^&*(),.?":{}|<>]/,
                     getCharacterValidationError("special character")
                   ),
-                //making sure the passwords match
+                // making sure the passwords match
                 confirmPassword: Yup.string()
                   .oneOf([Yup.ref("password"), null], "Passwords must match")
                   .required("Confirm Password is required"),
               })}
               onSubmit={(values, { resetForm }) => {
                 dispatch(register(values.username));
-                alert(`Registered with username: ${values.username}`); //MAKE A MODAL!!!!!!!!!
+                alert(`Registered with username: ${values.username}`);
                 resetForm();
               }}
             >
               {({ isSubmitting }) => (
                 <Form>
-                  {/*creating the inputs using the template formik suggests */}
+                  {/* creating the inputs using the template formik suggests */}
                   <Row>
                     <MyTextInput
                       label="First Name"

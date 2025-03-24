@@ -3,9 +3,11 @@ import { Container, Button } from "react-bootstrap";
 import heropic from "../images/heropic.jpg";
 import homepic from "../images/homepic.jpg";
 
+//setting up the home page component
 function Home() {
   return (
     <div>
+      {/* creating a hero section with a picture background and some generic brand text, styled attractively */}
       <Container
         className="mt-4 position-relative text-center text-white d-flex align-items-center justify-content-center"
         style={{
@@ -32,6 +34,7 @@ function Home() {
           </a>
         </div>
       </Container>
+      {/* a short about us section */}
       <Container className="py-5 container text-center">
         <h2 className="fw-bold mb-3">About Us</h2>
         <p className="lead mx-auto" style={{ maxWidth: "700px" }}>
@@ -40,6 +43,7 @@ function Home() {
           those who appreciate minimal aesthetics with a modern edge.
         </p>
       </Container>
+      {/* a call to action section with a button that leads to the product page */}
       <Container
         className="mt-4 position-relative text-center text-white d-flex align-items-center justify-content-center"
         style={{
@@ -49,7 +53,6 @@ function Home() {
           backgroundPosition: "center",
         }}
       >
-        {/* <div className="position-relative z-1 px-4"> */}
         <div
           className="p-4 rounded"
           style={{
@@ -75,6 +78,7 @@ function Home() {
           </Button>
         </div>
       </Container>
+      {/* and a footer where any contact links and social media links would be */}
       <footer
         className="bg-dark text-center py-4 mt-5"
         style={{ color: "#DDA15E" }}

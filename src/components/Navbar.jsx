@@ -8,7 +8,8 @@ import { logOut } from "../store/userSlice";
 function NavBar() {
   const { username, isLoggedIn } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  //basic bootstrap navbar to display the different components of the site
+  // basic bootstrap navbar to display the different components of the site,
+  // using the routes set on the home page
   return (
     <div>
       <Navbar
@@ -29,6 +30,7 @@ function NavBar() {
             </Nav.Link>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
+                {/* here im displaying the cart button and the login and register buttons */}
                 <Button
                   href="/cart"
                   className="pe-2"

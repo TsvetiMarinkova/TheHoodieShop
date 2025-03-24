@@ -3,9 +3,8 @@ import { useState } from "react";
 import { Card, Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, setTotal } from "../store/cartSlice";
-//import { useTotalPrice } from "./totalPriceContext"; //REPLACE WITH REDUX!!!
 
-//importing all the product images
+// importing all the product images
 import aquarium1 from "../images/aquarium1.png";
 import birds1 from "../images/birds1.png";
 import cherry1 from "../images/cherry1.png";
@@ -31,7 +30,7 @@ import squiggle2 from "../images/squiggle2.png";
 import ventures2 from "../images/ventures2.png";
 import wonder2 from "../images/wonder2.png";
 
-//object array with all the products and the relevant information for all of them
+// object array with all the products and the relevant information for all of them
 const productData = [
   {
     id: 1,
@@ -147,15 +146,8 @@ const productData = [
 
 function Products() {
   const dispatch = useDispatch();
-  //accessing the context to update the total price
-  //const { addToTotal } = useTotalPrice();
-  //state for tracking the selected colours
+  //state for tracking the selected sizes
   const [selectedSize, setSelectedSize] = useState({});
-
-  //adding the product price to the total when the buy button is pressed
-  //   function handleBuy(price) {
-  //     addToTotal(price); //CHANGE TO ADD TO CART!!!!!!!!!!!!!
-  //   }
 
   //setting the colour selection into state using the product id
   function handleSizeSelect(productId, sizes) {
@@ -168,25 +160,27 @@ function Products() {
   return (
     <div className="text-center">
       <div className="row">
-        {/*using the map function to create the product cards using the object array like required */}
+        {/* using the map function to create the product cards using the object array */}
         {productData.map((product) => (
           <div key={product.id} className="col-md-4 mb-4">
+            {/* using bootstrap card and dropdown for attractive styling */}
             <Card className="w-100 h-100 mt-3 d-flex flex-column justify-content-between">
               <Card.Img
                 variant="top"
                 src={product.image1}
                 alt={product.title}
                 className="img-fluid"
+                // making it so the picture changes on hover
                 onMouseOver={(e) => (e.currentTarget.src = product.image2)}
                 onMouseOut={(e) => (e.currentTarget.src = product.image1)}
               />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>{product.description}</Card.Text>
-                {/*using toFixed to keep the prices to two decimals */}
+                {/* using toFixed to keep the prices to two decimals */}
                 <Card.Text>£{product.price.toFixed(2)}</Card.Text>
 
-                {/*dropdown for size selection */}
+                {/* dropdown for size selection */}
                 <Dropdown
                   onSelect={(sizes) => handleSizeSelect(product.id, sizes)} //calling the function to set the size into state
                 >
@@ -194,7 +188,7 @@ function Products() {
                     {selectedSize[product.id] || "Select Size"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    {/*using map again to add all the colour options for each product */}
+                    {/* using map again to add all the colour options for each product */}
                     {product.sizes.map((sizes) => (
                       <Dropdown.Item key={sizes} eventKey={sizes}>
                         {sizes}
@@ -208,7 +202,7 @@ function Products() {
                   style={{ backgroundColor: "#283618" }}
                   //disabling the button if the user hasn't selected a size
                   disabled={!selectedSize[product.id]}
-                  //calling handleBuy when buy button is clicked
+                  //updating the total and the cart when the buy button is clicked
                   onClick={() => {
                     dispatch(setTotal(product.price));
                     dispatch(addToCart(product));

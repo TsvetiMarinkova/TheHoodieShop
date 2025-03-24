@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./store/store";
 import App from "./App";
 
+//wrapping the app in the router and the provider so everything inside the app can access these
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
